@@ -1,15 +1,13 @@
-from collections import deque
-
 def bfs(adj, n, start):
     visited = [False] * n
-    q = deque([start])
+    q = [start]
     visited[start] = True
     print(f"BFS starting from vertex {start}: ", end="")
     while q:
-        v = q.popleft()
+        v = q.pop(0)
         print(v, end=" ")
-        for i, connected in enumerate(adj[v]):
-            if connected and not visited[i]:
+        for i in range(n):
+            if adj[v][i] and not visited[i]:
                 visited[i] = True
                 q.append(i)
     print()
@@ -20,8 +18,8 @@ def dfs(adj, n, start):
     def visit(v):
         visited[v] = True
         print(v, end=" ")
-        for i, connected in enumerate(adj[v]):
-            if connected and not visited[i]:
+        for i in range(n):
+            if adj[v][i] and not visited[i]:
                 visit(i)
     visit(start)
     print()
